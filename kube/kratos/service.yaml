@@ -1,0 +1,18 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kratos-react
+  namespace: accounts-ecosystem
+spec:
+  selector:
+    app: kratos-react
+  ports:
+    - name: public
+      protocol: TCP
+      port: 32
+      targetPort: 4433
+    - name: admin
+      protocol: TCP
+      port: 16
+      targetPort: 4434

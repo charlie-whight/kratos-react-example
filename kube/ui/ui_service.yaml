@@ -1,0 +1,13 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kratos-react-ui
+spec:
+  selector:
+    app: kratos-react-ui
+  ports:
+    - name: app
+      protocol: TCP
+      port: 32
+      targetPort: 3000

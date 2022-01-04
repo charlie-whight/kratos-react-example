@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kratos-react
+  annotations:
+    service.rvu.co.uk/criticality: "low"
+    service.rvu.co.uk/owner: "customer-platform"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        environment: staging
+        app: kratos-react
+    spec:
+      containers:
+        - name: kratos-react
+          image: oryd/kratos:v0.8-sqlite
+          volumeMounts:
+          - mountPath: /schema
+            name: kratos-schema
+          - mountPath: /config
+            name: kratos-react-config
+          - mountPath: /hooks
+            name: before-login
+          - mountPath: /oidc
+            name: oidc-data-mapper
+          ports:
+            - name: public
+              containerPort: 4433
+            - name: admin
+              containerPort: 4434
+          args: [
+              "serve",
+              "-c",
+              "/config/kratos.yml"
+          ]
+
+      volumes:
+        - name: kratos-schema
+          configMap:
+            name: kratos-schema
+        - name: kratos-react-config
+          configMap:
+            name: kratos-react-config
+        - name: before-login
+          configMap:
+            name: before-login
+        - name: oidc-data-mapper
+          configMap:
+            name: oidc-data-mapper
+  selector:
+    matchLabels:
+      environment: staging
+      app: kratos-react

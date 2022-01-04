@@ -1,0 +1,18 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: oidc-react
+  namespace: accounts-ecosystem
+spec:
+  selector:
+    app: oidc-react
+  ports:
+    - name: public
+      protocol: TCP
+      port: 32
+      targetPort: 4444
+    - name: admin
+      protocol: TCP
+      port: 16
+      targetPort: 4445

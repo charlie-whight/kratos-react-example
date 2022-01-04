@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oidc-data-mapper
+data:
+  oidc-data-mapper.jsonnet: |-
+    local claims = std.extVar('claims');
+
+    {
+      identity: {
+        traits: {
+          email: claims.email
+        },
+      },
+    }

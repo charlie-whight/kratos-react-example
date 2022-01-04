@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kratos-react-ui
+  annotations:
+    service.rvu.co.uk/criticality: "low"
+    service.rvu.co.uk/owner: "customer-platform"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        environment: staging
+        app: kratos-react-ui
+    spec:
+      serviceAccountName:
+      containers:
+        - name: kratos-react-ui
+          image: registry.usw.co/uswitch/react-kratos-ui:latest
+          ports:
+            - name: app
+              containerPort: 3000
+              protocol: TCP
+  selector:
+    matchLabels:
+      environment: staging
+      app: kratos-react-ui

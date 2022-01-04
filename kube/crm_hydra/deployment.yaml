@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crm-react-hydra
+  namespace: accounts-ecosystem
+  annotations:
+    service.rvu.co.uk/criticality: "low"
+    service.rvu.co.uk/owner: "customer-platform"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        environment: staging
+        app: crm-react-hydra
+    spec:
+      containers:
+        - image: oryd/hydra:v1.10.6-sqlite
+          name: oidc-money
+          ports:
+            - name: public
+              containerPort: 4444
+            - name: admin
+              containerPort: 4445
+          env:
+            - name: DSN
+              value: memory
+            - name: URLS_LOGIN
+              value: https://public-ory-kratos.external.rvu.cloud/app/auth/login/crm
+            - name: URLS_CONSENT
+              value: https://public-ory-kratos.external.rvu.cloud/app/auth/consent
+            - name: URLS_SELF_ISSUER
+              value: https://crm-react-hydra-staging.external.rvu.cloud
+            - name: URLS_SELF_PUBLIC
+              value: https://crm-react-hydra-staging.external.rvu.cloud
+          args: [
+              "serve",
+              "all",
+              "--dangerous-force-http"
+          ]
+  selector:
+    matchLabels:
+      environment: staging
+      app: crm-react-hydra

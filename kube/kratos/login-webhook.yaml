@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: before-login
+data:
+  before-login.jsonnet: |-
+    function(ctx) {
+          "attributes": [
+              {
+                  "email": "cdwhight@gmail.com",
+                  "external_id": "c5e7356c-566c-4822-beff-c9e4987e0dd7"
+              }
+          ],
+          "events": [
+              {
+                  "name": "User Signin Requested",
+                  "external_id": "c5e7356c-566c-4822-beff-c9e4987e0dd7",
+                  "time": "2021-12-07T17:04:43+0000",
+                  "properties": {
+                      "signin_url": "http://test.com"
+                  }
+              }
+          ]
+    }

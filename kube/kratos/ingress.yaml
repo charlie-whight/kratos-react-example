@@ -1,0 +1,27 @@
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: kratos-react-public
+  annotations:
+    kubernetes.io/ingress.class: external
+    ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    - host: public-kratos-react.external.rvu.cloud
+      http:
+        paths:
+          - path: /public(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: kratos-react
+                port:
+                  number: 4433
+          - path: /app(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: kratos-react-ui
+                port:
+                  number: 3000

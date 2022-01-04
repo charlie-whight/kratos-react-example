@@ -1,0 +1,21 @@
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: crm-react-hydra
+  namespace: accounts-ecosystem
+  annotations:
+    kubernetes.io/ingress.class: external
+    ingress.kubernetes.io/rewrite-target: /
+    yggdrasil.uswitch.com/healthcheck-path: /health/alive
+    yggdrasil.uswitch.com/timeout: 30s
+spec:
+  rules:
+    - host: crm-react-hydra-staging.external.rvu.cloud
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              serviceName: crm-react-hydra
+              servicePort: 4444
