@@ -4,9 +4,10 @@ import {Link, RouteComponentProps} from "@reach/router";
 import {assertResponse, AuthPageState} from "./common";
 import {AuthPublicAPI} from "../service";
 import {parseURLQuery, redirectToSelfService,} from "../util";
-import {AuthActionContainer, AuthContainer, AuthForm, AuthFormButton, AuthFormField,} from "../component";
+import {AuthActionContainer, AuthContainer, AuthForm, AuthFormButton, AuthFormField, OIDCLogin,} from "../component";
 import {UiNodeInputAttributes} from "@ory/kratos-client";
 import {toUiNodePartial} from "../util/ui";
+import {findAllByDisplayValue} from "@testing-library/react";
 
 export interface LoginState extends AuthPageState {}
 
@@ -76,6 +77,7 @@ export class Login extends React.Component<RouteComponentProps, LoginState> {
             </Link>
           </AuthActionContainer>
         </AuthForm>
+
       </AuthContainer>
     );
   }

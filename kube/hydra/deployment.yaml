@@ -26,9 +26,9 @@ spec:
             - name: DSN
               value: memory
             - name: URLS_LOGIN
-              value: https://public-ory-kratos.external.rvu.cloud/app/auth/login
+              value: https://public-kratos-react.external.rvu.cloud/app/authlogin
             - name: URLS_CONSENT
-              value: https://public-ory-kratos.external.rvu.cloud/app/auth/consent
+              value: https://public-kratos-react.external.rvu.cloud/app/authconsent
             - name: URLS_SELF_ISSUER
               value: https://oidc-react-staging.external.rvu.cloud
             - name: URLS_SELF_PUBLIC
